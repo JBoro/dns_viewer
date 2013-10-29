@@ -18,7 +18,9 @@ $ cmake -DPCAP_ROOT_DIR=<libpcap/WinPCap install dir> -DCMAKE_PREFIX_PATH=<Qt5 i
 Linux
 ---
 $ make
+
 $ make package
+
 
 Windows 
 ---
