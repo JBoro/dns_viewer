@@ -1,0 +1,23 @@
+#ifndef __DNSVIEWER_H
+#define __DNSVIEWER_H
+
+#cmakedefine HAVE_REMOTE
+#cmakedefine WPCAP
+#cmakedefine _HAS_ARPA_INET_H
+#cmakedefine _HAS_WSOCK2_H
+#cmakedefine _BIG_ENDIAN
+#cmakedefine _HAS_PCAP_OPEN
+
+#define UI_INCLUDE "${UI_INCLUDE}"
+#define VERSION_MAJOR "${DNSViewer_VERSION_MAJOR}"
+#define VERSION_MINOR "${DNSViewer_VERSION_MINOR}"
+
+#ifdef _MSC_VER
+#    ifdef NDEBUG
+#        pragma comment(linker, "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+#    else
+#        pragma comment(linker, "/SUBSYSTEM:CONSOLE")
+#    endif
+#endif
+
+#endif
