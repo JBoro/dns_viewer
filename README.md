@@ -24,3 +24,6 @@ Windows
 ---
 $ msbuild PACKAGE.vcxproj /p:Configuration=Release /p:Platform=<platform>
 
+
+
+
