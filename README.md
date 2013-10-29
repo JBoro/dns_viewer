@@ -12,21 +12,15 @@ Dependencies
 
 Build
 ---
-`
-$ cd build  
-$ cmake -DPCAP_ROOT_DIR=<libpcap/WinPCap install dir> -DCMAKE_PREFIX_PATH=<Qt5 install dir/lib/cmake> ../src  
-`
+    $ cd build  
+    $ cmake -DPCAP_ROOT_DIR=<libpcap/WinPCap install dir> -DCMAKE_PREFIX_PATH=<Qt5 install dir/lib/cmake> ../src  
 
 Linux
 ---
-`
-$ make  
-$ make package  
-`
-
+    $ make  
+    $ make package  
 
 Windows 
 ---
-`
-$ msbuild PACKAGE.vcxproj /p:Configuration=Release /p:Platform=<platform>  
-`
+    $ msbuild PACKAGE.vcxproj /p:Configuration=Release /p:Platform=<platform>  
+
