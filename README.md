@@ -11,7 +11,7 @@ dns_viewer lets you view your DNS queries and log them to file.
 
 # Build
 $ cd build  
-$ cmake -DPCAP_ROOT_DIR=<libpcap/WinPCap install dir> -DCMAKE_PREFIX_PATH=<Qt5 install dir/lib/cmake> ../src  
+$ cmake -DPCAP_ROOT_DIR= <libpcap/WinPCap install dir> -DCMAKE_PREFIX_PATH= <Qt5 install dir/lib/cmake> ../src  
 
 ## Linux
 $ make  
