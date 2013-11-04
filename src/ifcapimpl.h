@@ -13,7 +13,7 @@ public:
     IFCapImpl();
     ~IFCapImpl();
 
-    void getDeviceList(std::insert_iterator<std::map<std::string, std::string> > oit, 
+    void getDeviceList(std::map<std::string, std::string>& devMap, 
             std::string &errmsg);
     int init(const std::string &dev, std::string &errmsg);
     void shutDown();

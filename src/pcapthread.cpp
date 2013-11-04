@@ -143,7 +143,7 @@ QStringList PCapThread::getDeviceList()
     QStringList qlist;
     devMap_.clear();
     std::string errmsg;
-    spPCapImpl_->getDeviceList(std::inserter(devMap_, devMap_.begin()), errmsg);
+    spPCapImpl_->getDeviceList(devMap_, errmsg);
     if (!errmsg.empty())
         emit sigError(QString::fromStdString(errmsg));
     else if (devMap_.empty())

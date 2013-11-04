@@ -151,11 +151,9 @@ unsigned long long IFCapImpl::getNBytes()
     return nBytes_;
 }
 
-void IFCapImpl::getDeviceList(std::insert_iterator<std::map<std::string, std::string> > oit, std::string &errmsg)
+void IFCapImpl::getDeviceList(std::map<std::string, std::string>& devMap, std::string &errmsg)
 {
-    std::map<std::string, std::string> _devMap( doGetDeviceList(errmsg) );
-    if (errmsg.empty() )
-        std::copy(_devMap.begin(), _devMap.end(), oit);
+    doGetDeviceList(errmsg).swap(devMap);
 }
 
 int IFCapImpl::getNextPacket(std::string &pktStr)
