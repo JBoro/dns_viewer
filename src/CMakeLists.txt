@@ -10,19 +10,21 @@ project(DNSViewer)
 set (DNSViewer_VERSION_MAJOR 0)
 set (DNSViewer_VERSION_MINOR 6)
 
-find_package(Qt5Widgets)
-qt5_wrap_ui(UI_ADDED listwindow.ui)
-qt5_add_resources(RESOURCE_ADDED ../DNSViewer.qrc)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+
+find_package(Qt4 REQUIRED)
+set(UI_ADDED listwindow.ui)
+set(RESOURCE_ADDED ../DNSViewer.qrc)
 set(SRCS 
-    ${RESOURCE_ADDED} ${UI_ADDED} 
+    ${RESOURCE_ADDED}
     listwindow.cpp main.cpp pcapthread.cpp ifcapimpl.cpp pcapimpl.cpp)
 if (MSVC)
   set(SRCS ${SRCS} ../res.rc)
 endif()
 
 add_executable(dnsviewer ${SRCS})
-qt5_use_modules(dnsviewer Widgets)
+target_link_libraries(dnsviewer Qt4::QtGui)
 
 #find wpcap/pcap
 find_path(PCAP_INCLUDES pcap.h
@@ -46,7 +48,7 @@ test_big_endian(_BIG_ENDIAN)
 
 #dnsviewer.h
 check_include_files(arpa/inet.h _HAS_ARPA_INET_H)
-set(UI_INCLUDE ${UI_ADDED})
+set(UI_INCLUDE ui_listwindow.h)
 configure_file(${PROJECT_SOURCE_DIR}/dnsviewer.h.in
     ${PROJECT_BINARY_DIR}/dnsviewer.h)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

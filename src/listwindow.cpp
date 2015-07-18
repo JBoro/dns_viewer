@@ -38,7 +38,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QFileDialog>
 #include "listwindow.h"
 #include "dnsviewer.h"
-#include UI_INCLUDE
+#include "ui_listwindow.h" 
 #include "pcapthread.h"
 
 namespace DNSView
