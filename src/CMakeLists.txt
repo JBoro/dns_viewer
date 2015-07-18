@@ -54,10 +54,6 @@ configure_file(${PROJECT_SOURCE_DIR}/dnsviewer.h.in
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 install(TARGETS dnsviewer DESTINATION bin)
-get_target_property(QT_LIBRARY_DIR Qt5::Widgets LOCATION)
-get_filename_component(QT_LIBRARY_DIR ${QT_LIBRARY_DIR} PATH)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/FixBundle.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/FixBundle.cmake @ONLY)
-install(SCRIPT ${CMAKE_CURRENT_BINARY_DIR}/FixBundle.cmake)
 
 #installer
 include(InstallRequiredSystemLibraries)
