@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 2.8.9)
+cmake_minimum_required(VERSION 3.0)
 include(CheckLibraryExists)
 include (CheckIncludeFiles)
+include(CMakePrintHelpers)
 include(TestBigEndian)
 if (POLICY CMP0020)
     cmake_policy(SET CMP0020 NEW)
@@ -13,18 +14,27 @@ set (DNSViewer_VERSION_MINOR 6)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt4 REQUIRED)
+find_package(Qt4 COMPONENTS QtCore QtGui)
+find_package(Qt5Widgets)
+find_package(Qt5Gui)
+find_package(Qt5Core)
 set(UI_ADDED listwindow.ui)
 set(RESOURCE_ADDED ../DNSViewer.qrc)
 set(SRCS 
-    ${RESOURCE_ADDED}
+    ${RESOURCE_ADDED} ${UI_ADDED}
     listwindow.cpp main.cpp pcapthread.cpp ifcapimpl.cpp pcapimpl.cpp)
 if (MSVC)
   set(SRCS ${SRCS} ../res.rc)
 endif()
 
 add_executable(dnsviewer ${SRCS})
-target_link_libraries(dnsviewer Qt4::QtGui)
+if (Qt5Widgets_LIBRARIES AND Qt5Core_LIBRARIES AND Qt5Gui_LIBRARIES)
+    set(QT_LIBRARIES ${Qt5Widgets_LIBRARIES} ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARIES})
+else()
+    set(QT_LIBRARIES Qt4::QtCore Qt4::QtGui)
+endif()
+cmake_print_variables(QT_LIBRARIES)
+target_link_libraries(dnsviewer ${QT_LIBRARIES})
 
 #find wpcap/pcap
 find_path(PCAP_INCLUDES pcap.h
@@ -48,7 +58,6 @@ test_big_endian(_BIG_ENDIAN)
 
 #dnsviewer.h
 check_include_files(arpa/inet.h _HAS_ARPA_INET_H)
-set(UI_INCLUDE ui_listwindow.h)
 configure_file(${PROJECT_SOURCE_DIR}/dnsviewer.h.in
     ${PROJECT_BINARY_DIR}/dnsviewer.h)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
