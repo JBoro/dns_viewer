@@ -37,6 +37,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QDateTime>
 
 #include "dnsviewer.h"
+
+#ifdef _HAS_ARPA_INET_H
+#   include <arpa/inet.h>
+#elif defined(_HAS_WSOCK2_H)
+#   include <Winsock2.h>
+#else
+#   error no ntohs
+#endif
+
+#include "dnsviewer.h"
 #include "pcap.h"
 #include "pcapimpl.h"
 
@@ -88,8 +98,16 @@ std::map<std::string, std::string> PCapImpl::doGetDeviceList(std::string &errmsg
     else
     {
         for(pcap_if_t *d=pDevsH_; d; d=d->next)
-            _nameMap.insert(std::map<std::string, std::string>::value_type( 
-                (d->description ? d->description : d->name), d->name ) );
+        {
+            for (pcap_addr_t *addy=d->addresses; addy; addy=addy->next)
+            {
+                if (addy->addr->sa_family == AF_INET || addy->addr->sa_family == AF_INET6)
+                {
+                    _nameMap.insert(std::map<std::string, std::string>::value_type( 
+                        (d->description ? d->description : d->name), d->name ) );
+                }
+            }
+        }
         pcap_freealldevs(pDevsH_);
     }
     pDevsH_ = NULL;

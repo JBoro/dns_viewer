@@ -9,7 +9,7 @@ endif()
 project(DNSViewer)
 
 set (DNSViewer_VERSION_MAJOR 0)
-set (DNSViewer_VERSION_MINOR 6)
+set (DNSViewer_VERSION_MINOR 7)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
